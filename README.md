@@ -309,7 +309,79 @@ Implements all required elements of the course rubric:
 
 Feel free to fork, extend, or integrate into shop-floor tooling!
 
+
+
+
+
+## ✅ README Update – Phase 4
+
+*(English & 中文双语部分，可直接复制到 README.md “Changelog / 项目进度” 区域)*
+
+---
+
+### 🚀 Phase 4 — Export & UI Polish
+
+**Status:** ✅ *Completed*
+
+#### ✨ What’s new
+
+| Feature                             | Details                                                                                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **One-click CSV export**            | • New **“💾 Export CSV”** button<br>• Auto-names file `plan_<material>_<YYYY-MM-DD>.csv`<br>• Saves to notebook folder and shows an in-notebook download link |
+| **Shared output area**              | All messages from *Generate* and *Export* now appear in the same `output_area`, keeping the interface tidy                                                    |
+| **Reflection shows exported file**  | Summary adds line:<br>`- Exported file : plan_aluminum_2025-06-29.csv`                                                                                        |
+| **UI cosmetics**                    | • Horizontal rule (`---`) between Full / Machining tables<br>• Emoji section titles 🗂️ / 🛠️<br>• Download link prefixed with 👉                             |
+| **Power column always highlighted** | `display_plan_table()` subset now includes `"Power Valid"`                                                                                                    |
+
+#### 📄 Files touched
+
+| File                   | Key edits                                                       |
+| ---------------------- | --------------------------------------------------------------- |
+| `cnc_llm.ipynb`        | + export button & callback; UI divider; titles                  |
+| `reflect_summary()`    | Adds exported-file line; single display (no duplication)        |
+| `display_plan_table()` | Highlights *Power Valid*                                        |
+| *(minor)*              | top-level placeholder `df_full_valid = None` to satisfy linters |
+
+---
+
+### 🌟 Typical workflow now
+
+1. Describe part → choose material → **Generate CNC Plan**
+2. Review Full & Machining tables (invalid cells in red)
+3. Click **Export CSV** → see ✅ message & 👉 download link
+4. Reflection Summary lists invalid counts, token usage **and** exported filename
+
+---
+
+
+### 🔜 Next (Phase 5 / 6) – Optional
+
+* Excel (multi-sheet) export
+* Few-shot example retrieval
+* Auto-correction loop for invalid parameters
+
+Feel free to copy-paste this section into your README and push with a commit like:
+
+```
+docs: update README for Phase 4 – CSV export & UI polish
 ```
 
-> Copy-paste the commit message into `git commit -m`, save the README as `README.md`, and push. Phase 3 is officially wrapped up!
-```
+
+按照plan还要做的，但是基本的应该做完了，readme要重写，这只是为了让你们看懂，所以都是笔记。然后LLMs_projet_note那个文件也是笔记，为最后的rapport写的，你可以看看。
+
+
+理论上剩这两个阶段
+
+## 🌟 阶段 5–6 加分选项（按精力选做）
+
+1. **向量检索 Few-shot**
+
+   * 用 `sentence_transformers` 把 5 条手工工艺示例嵌入向量库 → 按余弦近邻找最相似示例拼进 prompt。
+2. **自动纠错循环**
+
+   * 如果 `RPM Valid` 为 False → 重新调用 LLM 要求修正这些步。
+3. **批量 CSV**
+
+   * `parts.csv` 每行一个描述；循环输出多 sheet Excel 并汇总合规率柱状图。
+
+---
