@@ -121,114 +121,9 @@ This README fully documents the current work, technical decisions, function logi
 
 
 
-以下内容可直接存成 **`README.md`** 或者粘到报告笔记中。已按 *目录->文件->函数->逻辑* 层级完整梳理，并列出下一阶段开发计划，便于同学快速理解并继续迭代。
-（所有路径均以 `ML_pro/` 为根）
-
----
-
-## 📂 项目结构一览
-
-| 路径                       | 说明                                              |
-| ------------------------ | ----------------------------------------------- |
-| `cnc_llm.ipynb`          | 主 Notebook：UI、业务流程、结果可视化                        |
-| `llm_utils.py`           | 与 OpenAI API 交互、自动重试、token 统计                   |
-| `requirements.txt`       | 项目依赖（`openai · tenacity · pandas · ipywidgets`） |
-| `.env`                   | 私密环境变量，仅存 `OPENAI_API_KEY=...`                  |
-| `LLMs_projet_note.ipynb` | 早期实验草稿（可忽略或存档）                                  |
-
----
-
-## 1️⃣ `llm_utils.py` —— LLM 调用核心
-
-```python
-load_dotenv()                        # 读取 .env
-client = openai.OpenAI(api_key=...)  # 初始化安全客户端
-TOKENS_USED: int = 0                 # 全局 token 计数
-```
-
-### chat\_completion(prompt,…, verbose=True)
-
-> **功能**：
->
-> 1. 固定 system prompt，确保输出为 *JSON array*。
-> 2. `tenacity` 自动重试，最大 3 次、指数退避 1–10 s。
-> 3. 成功后累加 `response.usage.total_tokens` 到 `TOKENS_USED`。
-> 4. `verbose` 开关：调试期打印原始 JSON，生产期静默。
-
----
-
-## 2️⃣ `cnc_llm.ipynb` —— 主流程拆解
-
-| 步骤           | 对应单元函数                                                                | 关键逻辑                                                                                  |
-| ------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **UI 定义**    | `desc_input / material_selector / generate_button / output_area`      | 纯 `ipywidgets`，最后一次性 `display(...)`                                                   |
-| **按钮回调**     | `on_generate_clicked(b)`                                              | 整个业务管线                                                                                |
-| ① 获取 outline | `get_outline(part, material)`<br>→ `chat_completion(verbose=False)`   | 生成高阶工序列表，如 “Rough Machining”                                                          |
-| ② 获取 detail  | `get_detail(outline, …)`                                              | 传入 outline，请求带 rpm/feed 的 JSON                                                        |
-| ③ 解析         | `parse_llm_output(raw_json)`                                          | `json.loads` → DataFrame 列重命名                                                         |
-| ④ 两视图展示      | *同一单元内*<br>`df_full_valid`（完整流程）<br>`df_cut_valid`（过滤 rpm>0 & feed>0） | <br>• 用 `validate_plan` 添列 `RPM Valid / Feed Valid`<br>• `display_plan_table()` 高亮非法值 |
-| ⑤ 反思摘要       | `reflect_summary(raw_json, df_full_valid)`                            | 步数、非法计数、Token、人工提示                                                                    |
-
-> **validate\_plan(df, material)**
-> 读取内置区间（铝/钢），用 `between()` 判断合法。
-
-> **highlight\_invalid(val)**
-> 返回红底 CSS。pandas≥2.2 使用 `df.style.map` 避免未来废弃警告。
-
----
-
-## 3️⃣ 已实现的小细节
-
-| 细节                        | 为什么要这样                      |
-| ------------------------- | --------------------------- |
-| `.env + load_dotenv()`    | 不泄漏 API Key，符合课程“安全 & 费用”要求 |
-| `TOKENS_USED` 统计          | 便于写在报告里评估成本                 |
-| 双视图：Full & Machining-only | 让阅卷老师既看全流程，又能专注切削参数         |
-| `verbose` 开关              | Demo 时界面干净，调试时可追 JSON       |
-
----
-
-## 4️⃣ 下一阶段路线图（对应原蓝图 Phase 2-3）
-
-| 阶段                                | 目标                                                                               | 关键修改点                                                    |
-| --------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **Phase 2**<br>链式 Prompt & 多材料    | - 将 `get_outline` + `get_detail` 明确分成两轮 prompt（已具雏形）<br>- 在 UI 加刀具/材料下拉框扩展更多材料   | `get_detail` prompt 中注入材料区间，让 LLM 自动调 rpm/feed           |
-| **Phase 3**<br>外部化材料-参数数据库        | - 把 `LIMITS` 写入 `materials.json`<br>- `validate_plan` 动态读取                       | 新建 `materials.json` 并调整 `validation.py`（待创建）             |
-| **Phase 4**<br>功率/扭矩校验 + CSV 导出   | - `add_power_check(df)` 估算功率并验证<br>- `widgets.Button("💾 Export")` 输出 `plan.csv` | Notebook UI 再加一个导出按钮                                     |
-| **Phase 5**<br>Few-shot vector 召回 | 选 5 条人工优质工艺 → `sentence_transformers` 建索引，近邻拼进 prompt                            | 另建 `examples/` 目录，写 `retriever.py`                       |
-| **Phase 6**<br>自动纠错循环             | 若 `RPM Valid`=False → 自动回写提示并二次调用 LLM 修正                                         | 在 `on_generate_clicked` 里做 while-loop with max 2 retries |
-
-> 可以按时间/精力只实现 2 – 3 – 4 就能拿高分；5 – 6 作为加分项。
-
----
-
-## 5️⃣ 对同学的使用指引
-
-1. **安装依赖**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. **配置 Key**
-   在项目根建 `.env` ✍️
-
-   ```env
-   OPENAI_API_KEY=sk-xxxx
-   ```
-3. **运行 Notebook**
-   `cnc_llm.ipynb` → *Run All*
-4. **输入零件描述 & 选材料** → 点击 **Generate CNC Plan**
-5. **查看两张表**
-
-   * *Full Process Plan*：含选料/检验
-   * *Machining-only Plan*：仅切削步骤
-6. **阅读 Reflection Summary** → 了解非法参数与 token 成本
-7. **下一步**：按 README 的“阶段路线图”实现 Phase 2 …
-
----
 
 
-## ✅ README 更新（Phase 2 小节）
+
 
 ---
 
@@ -292,3 +187,129 @@ TOKENS_USED: int = 0                 # 全局 token 计数
 | *Notebook Cells* | `MATERIAL_LIMITS` defined, `validate_plan()` updated |
 
 ---
+
+## 📄 README.md (English, updated to Phase 3)
+
+````markdown
+# CNC-LLM Process Planner 🛠️🤖
+
+A Python notebook that lets an OpenAI LLM draft, validate and present CNC machining process plans from plain-language part descriptions.
+
+> **Course project**: *LLM-Assisted Process Planning for CNC Machining*
+
+---
+
+## 1. Quick Run
+
+```bash
+# install
+pip install -r requirements.txt
+
+# put your key in .env
+echo "OPENAI_API_KEY=sk-…" > .env
+````
+
+Open **`cnc_llm.ipynb`** → *Run All* →
+Describe a part → pick a material → **Generate CNC Plan**.
+
+---
+
+## 2. Project Tree
+
+```
+ML_pro/
+├─ cnc_llm.ipynb      # main demo notebook (UI + pipeline)
+├─ llm_utils.py       # LLM wrapper + prompt helpers
+├─ validation.py      # rpm/feed + power validation  ← Phase 3
+├─ materials.json     # machining limits database  ← Phase 3
+├─ requirements.txt
+└─ README.md
+```
+
+---
+
+## 3. Pipeline Overview
+
+| Stage        | Function                                                 | Details                                                        |
+| ------------ | -------------------------------------------------------- | -------------------------------------------------------------- |
+| **Outline**  | `get_outline()`                                          | LLM returns JSON list `[{step}]`                               |
+| **Detail**   | `get_detail()`                                           | Adds tool, operation, rpm, feed – **material limits injected** |
+| **Parse**    | `parse_llm_output()`                                     | JSON → DataFrame                                               |
+| **Validate** | `validate_plan()` (rpm/feed)<br>`add_power_check()` (kW) | Adds `RPM Valid, Feed Valid, Power Valid`                      |
+| **Display**  | `display_plan_table()`                                   | Full process & machining-only tables, invalid cells red        |
+| **Reflect**  | `reflect_summary()`                                      | counts invalids, token cost, human-oversight tips              |
+
+All LLM calls use `chat_completion(messages=…)` with auto-retry and a global token counter.
+
+---
+
+## 4. Material Database (Phase 3)
+
+`materials.json`
+
+| material | rpm (min-max) | feed (min-max) |
+| -------- | ------------- | -------------- |
+| aluminum | 3000-12000    | 800-1500       |
+| steel    | 500-1500      | 100-300        |
+| brass    | 1500-6000     | 400-800        |
+| titanium | 100-500       | 50-200         |
+| plastic  | 2000-8000     | 500-1500       |
+
+`validation.py` loads this database once; adding a new material requires only editing the JSON.
+
+---
+
+## 5. Power Check (Phase 3)
+
+`add_power_check()` estimates spindle power per step
+
+```
+Power ≈ cutting force × cutting speed
+```
+
+Default limits: Ø10 mm cutter, 5 kW machine, 80 % safety.
+`Power Valid` is automatically highlighted.
+
+---
+
+## 6. User Interface
+
+* Textarea for part description
+* Dropdown with 5 materials
+* **Generate** button
+* Two tables with automatic highlighting
+* Reflection block with statistics
+
+![screenshot](docs/screenshot.png) <!-- optional -->
+
+---
+
+## 7. Roadmap
+
+| Phase | Goal                          | Status            |
+| ----- | ----------------------------- | ----------------- |
+| 0-1   | prototype, API safety         | ✅ done            |
+| 2     | chain prompts, multi-material | ✅ done            |
+| **3** | external DB & power check     | ✅ **this commit** |
+| 4     | CSV / Excel export, nicer UI  | planned           |
+| 5     | few-shot retrieval examples   | optional          |
+| 6     | auto-correction loop          | optional          |
+
+---
+
+## 8. Credits
+
+Implements all required elements of the course rubric:
+
+1. **LLM Call** – clearly shown in `llm_utils.py`
+2. **Post-processing** – JSON parsing, DataFrame styling
+3. **Validation Logic** – rpm, feed, power checks
+4. **Notebook Output** – full & machining-only tables
+5. **Reflection Section** – reliability analysis and token cost
+
+Feel free to fork, extend, or integrate into shop-floor tooling!
+
+```
+
+> Copy-paste the commit message into `git commit -m`, save the README as `README.md`, and push. Phase 3 is officially wrapped up!
+```
