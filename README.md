@@ -228,3 +228,67 @@ TOKENS_USED: int = 0                 # 全局 token 计数
 ---
 
 
+## ✅ README 更新（Phase 2 小节）
+
+---
+
+### 🚀 Phase 2 — Chain Prompt + Multi-material Support
+
+**Status: ✅ Completed**
+
+### 🔥 Summary of Changes
+
+* ✔️ Upgraded from single-prompt to **chain-prompt architecture**:
+  → First ask for a high-level outline (`get_outline()`),
+  → Then request detailed steps with parameters (`get_detail()`).
+
+* ✔️ Added a **Material Selector Dropdown** to the UI.
+  → Supports 5 materials: **aluminum, steel, brass, titanium, plastic**.
+
+* ✔️ **Material-specific constraints are dynamically injected into prompts.**
+  → Example:
+  *“For titanium, spindle speed must be 100–500 rpm and feed 50–200 mm/min.”*
+
+* ✔️ Defined a global dictionary `MATERIAL_LIMITS` with rpm/feed ranges for each material.
+
+* ✔️ The validation logic (`validate_plan()`) now automatically checks spindle speed and feed against material constraints.
+
+* ✔️ Output now includes:
+
+  * **Full Process Plan:** Includes setup, fixturing, inspection steps.
+  * **Machining-only Plan:** Filters only steps with valid spindle/feed parameters.
+
+* ✔️ Reflection Summary shows:
+
+  * Total steps generated
+  * Number of invalid RPM/Feed
+  * Token usage
+  * Human oversight recommendation
+
+### 💡 Example Improvements (Titanium):
+
+| Before (Incorrect)                  | After (Correct)                       |
+| ----------------------------------- | ------------------------------------- |
+| Feed = 1000 mm/min (❌ way too high) | Feed = 120 mm/min (✔️ correct)        |
+| RPM = 6000 (❌ aluminum speed)       | RPM = 350 (✔️ realistic for titanium) |
+
+---
+
+### 🔗 Phase 3 (Next) – Planned Improvements
+
+* Externalize `MATERIAL_LIMITS` into **`materials.json`** for better scalability.
+* Optionally link tool-specific parameters (`tool_catalog.json`).
+* Implement power and torque checks.
+* Add CSV/Excel export for process plans.
+
+---
+
+### 📍 Files Updated in Phase 2
+
+| File             | Updates                                              |
+| ---------------- | ---------------------------------------------------- |
+| `cnc_llm.ipynb`  | UI update + chain prompt logic                       |
+| `llm_utils.py`   | `get_outline()`, `get_detail()` improved             |
+| *Notebook Cells* | `MATERIAL_LIMITS` defined, `validate_plan()` updated |
+
+---
