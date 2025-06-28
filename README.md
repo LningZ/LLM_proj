@@ -1,3 +1,126 @@
+Here is the English version of your README, fully detailed and structured for sharing with teammates or writing reports.
+
+---
+
+## 📂 Project Structure Overview
+
+| Path                     | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| `cnc_llm.ipynb`          | Main notebook: UI, pipeline workflow, and result visualization |
+| `llm_utils.py`           | OpenAI API interaction, auto-retry logic, and token counting   |
+| `requirements.txt`       | Dependencies (`openai · tenacity · pandas · ipywidgets`)       |
+| `.env`                   | Private environment file (stores `OPENAI_API_KEY=...`)         |
+| `LLMs_projet_note.ipynb` | Early experiments (optional to archive)                        |
+
+---
+
+## 1️⃣ `llm_utils.py` — LLM Interaction Core
+
+```python
+load_dotenv()                        # Load .env securely
+client = openai.OpenAI(api_key=...)  # OpenAI client initialization
+TOKENS_USED: int = 0                 # Global token counter
+```
+
+### Function: `chat_completion(prompt, ..., verbose=True)`
+
+> **What it does:**
+>
+> 1. Uses a fixed `system_prompt` to ensure JSON array outputs.
+> 2. Handles errors with `tenacity` — retries up to 3 times with exponential backoff (1–10 seconds).
+> 3. Tracks token usage via `response.usage.total_tokens` added to `TOKENS_USED`.
+> 4. Has a `verbose` flag — prints raw JSON when debugging, silent in production.
+
+---
+
+## 2️⃣ `cnc_llm.ipynb` — Workflow Breakdown
+
+| Step                 | Functions/Cells                                                     | Logic Description                                                                                                |
+| -------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **UI Setup**         | `desc_input`, `material_selector`, `generate_button`, `output_area` | Built with `ipywidgets`; displayed together at the end with `display(...)`.                                      |
+| **Button Callback**  | `on_generate_clicked(b)`                                            | Main pipeline logic.                                                                                             |
+| ① Get Outline        | `get_outline(part, material)` → `chat_completion(verbose=False)`    | Returns high-level steps like "Rough Machining".                                                                 |
+| ② Get Detailed Plan  | `get_detail(outline, ...)`                                          | Generates JSON array with step, tool, rpm, and feed based on outline.                                            |
+| ③ Parse Output       | `parse_llm_output(raw_json)`                                        | Parses JSON into DataFrame with renamed columns.                                                                 |
+| ④ Dual Table Display | `df_full_valid` (full process)<br>`df_cut_valid` (machining only)   | • Adds validation columns (`RPM Valid`, `Feed Valid`)<br>• `display_plan_table()` highlights invalid parameters. |
+| ⑤ Reflection Summary | `reflect_summary(raw_json, df_full_valid)`                          | Summarizes total steps, invalid counts, token usage, and human oversight suggestions.                            |
+
+> **Function: `validate_plan(df, material)`**
+> Checks spindle speed and feed rates against limits based on the material.
+
+> **Function: `highlight_invalid(val)`**
+> Returns CSS style (`background-color:#FFD2D2`) for invalid entries.
+> Switched from `applymap()` to `map()` (Pandas ≥ 2.2) to avoid deprecation warnings.
+
+---
+
+## 3️⃣ Key Implementation Details
+
+| Feature                | Why It’s Important                                          |
+| ---------------------- | ----------------------------------------------------------- |
+| `.env + load_dotenv()` | Keeps API keys secure; complies with course requirements.   |
+| `TOKENS_USED` Tracking | Adds transparency about token cost for reporting.           |
+| Dual Table View        | Shows the full process and highlights only machining steps. |
+| `verbose` Flag         | Allows clean UI during runs and full debugging when needed. |
+
+---
+
+## 4️⃣ Next Development Roadmap (Phase 2–6)
+
+| Phase                                       | Goal                                                                                                             | Key Changes                                                        |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **Phase 2 — Chain Prompt + Multi-material** | • Separate `get_outline` and `get_detail` into true two-step prompts.<br>• Add material/tool dropdowns in UI.    | Inject material constraints into the prompt for accurate rpm/feed. |
+| **Phase 3 — Externalize Validation Data**   | • Move parameter limits into `materials.json`.<br>• Refactor `validate_plan()` to read dynamically.              | Create `materials.json` and `validation.py`.                       |
+| **Phase 4 — Power Check + CSV Export**      | • Implement `add_power_check(df)` for torque/power limits.<br>• Add a save-to-CSV button.                        | Extend UI with `widgets.Button("💾 Export")`.                      |
+| **Phase 5 — Few-shot Retrieval**            | • Create embeddings for 5 handcrafted process plans.<br>• Retrieve similar plans dynamically to enhance prompts. | Add `examples/` directory and build `retriever.py`.                |
+| **Phase 6 — Auto-Correction Loop**          | • If `RPM Valid` or `Feed Valid` fails, prompt LLM to revise steps automatically.                                | Add retry loops inside `on_generate_clicked()`.                    |
+
+> ✅ Completing Phase 2–4 is enough for high marks.
+> 🔥 Phase 5–6 are bonus for innovation.
+
+---
+
+## 5️⃣ Usage Instructions for Teammates
+
+1. **Install Dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Configure API Key**
+   Create a `.env` file in the root directory:
+
+   ```env
+   OPENAI_API_KEY=sk-xxxx
+   ```
+
+3. **Run the Notebook**
+   Open `cnc_llm.ipynb` → Run All
+
+4. **Input**
+   Describe your part and select the material → Click **"Generate CNC Plan"**.
+
+5. **Output**
+
+   * **Full Process Plan**: Includes selection, preparation, inspection, etc.
+   * **Machining-only Plan**: Filters to only the steps with spindle/feed parameters.
+
+6. **Review the Reflection Summary**
+   Understand step count, validation results, and token usage.
+
+7. **Next Steps**
+   Follow the development roadmap outlined above to continue upgrading the project.
+
+---
+
+This README fully documents the current work, technical decisions, function logic, and the plan for the next steps. It is suitable both as team documentation and for submitting as part of your project report.
+
+
+
+
+
+
 以下内容可直接存成 **`README.md`** 或者粘到报告笔记中。已按 *目录->文件->函数->逻辑* 层级完整梳理，并列出下一阶段开发计划，便于同学快速理解并继续迭代。
 （所有路径均以 `ML_pro/` 为根）
 
@@ -103,3 +226,5 @@ TOKENS_USED: int = 0                 # 全局 token 计数
 7. **下一步**：按 README 的“阶段路线图”实现 Phase 2 …
 
 ---
+
+
