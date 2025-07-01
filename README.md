@@ -385,3 +385,23 @@ docs: update README for Phase 4 – CSV export & UI polish
    * `parts.csv` 每行一个描述；循环输出多 sheet Excel 并汇总合规率柱状图。
 
 ---
+
+
+
+今天做了：用 Pydantic 对 LLM 输出做格式校验 + 自动重试
+Robust JSON parsing & automatic retry using Pydantic
+
+构建了 OutlineStep 和 DetailStep 数据模型，对 LLM 返回的 JSON 格式进行字段校验。
+
+若格式错误（缺字段、数据类型错误等），会自动触发重试，直到返回合法 JSON 或达到最大重试次数。
+
+极大提升了系统的稳定性、鲁棒性和 AI 输出的可靠性。
+
+2️⃣ ✅ Prompt 中动态注入材料物理约束
+
+
+根据 materials.json 中的材料参数，自动在 Prompt 中加入当前材料的主轴转速 (RPM) 和进给速度 (Feed) 上下限。
+
+LLM 在生成工艺参数时就会遵守物理约束，避免出现超速、过快进给等物理不合理的数值。
+
+让 LLM 更像一个有“工艺意识”的专业工程师，减少无效输出，提高整体结果质量。
