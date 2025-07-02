@@ -1,0 +1,58 @@
+[
+    {
+      "part": "aluminum gear with 20 teeth",
+      "material": "aluminum",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø12mm","operation":"facing","rpm":10000,"feed":1200},
+        {"step":"Rough Pocket","tool":"End mill Ø10mm","operation":"pocket milling","rpm":11000,"feed":1500},
+        {"step":"Finish Gear Teeth","tool":"Form cutter Ø8mm","operation":"gear shaping","rpm":9500,"feed":1000},
+        {"step":"Chamfer Edges","tool":"Chamfer mill Ø6mm","operation":"chamfering","rpm":9000,"feed":1200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "steel shaft Ø30 x 120 mm",
+      "material": "steel",
+      "detail": [
+        {"step":"Rough Turning","tool":"Carbide insert CNMG","operation":"turning","rpm":900,"feed":200},
+        {"step":"Finish Turning","tool":"Finishing insert DNMG","operation":"finish turning","rpm":1200,"feed":150},
+        {"step":"Threading","tool":"Thread insert","operation":"thread cutting","rpm":700,"feed":100},
+        {"step":"Chamfer Ends","tool":"Chamfer tool","operation":"chamfering","rpm":800,"feed":200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "brass fluidic manifold 80x60x10 mm",
+      "material": "brass",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø10mm","operation":"facing","rpm":5000,"feed":800},
+        {"step":"Drill Micro Holes","tool":"Drill Ø1.2mm","operation":"drilling","rpm":9000,"feed":300},
+        {"step":"Finish Pocket","tool":"End mill Ø6mm","operation":"pocket milling","rpm":6000,"feed":600},
+        {"step":"Chamfer Holes","tool":"Chamfer mill Ø3mm","operation":"chamfering","rpm":5500,"feed":700},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "titanium turbine blade 180 mm tall",
+      "material": "titanium",
+      "detail": [
+        {"step":"Rough Machining Blade","tool":"Ball end mill Ø10mm","operation":"rough milling","rpm":400,"feed":120},
+        {"step":"Semi-finish Blade","tool":"Ball end mill Ø8mm","operation":"semi-finish milling","rpm":500,"feed":100},
+        {"step":"Finish Freeform Surface","tool":"Ball end mill Ø6mm","operation":"finish milling","rpm":600,"feed":80},
+        {"step":"Drill Root Flange Holes","tool":"Drill Ø6mm","operation":"drilling","rpm":500,"feed":150},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "POM cam plate Ø200 x15 mm with eccentric slot",
+      "material": "plastic",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø16mm","operation":"facing","rpm":6000,"feed":1200},
+        {"step":"Mill Eccentric Slot","tool":"End mill Ø8mm","operation":"slot milling","rpm":7000,"feed":1500},
+        {"step":"Drill Bolt Holes","tool":"Drill Ø8mm","operation":"drilling","rpm":7500,"feed":1000},
+        {"step":"Chamfer Edges","tool":"Chamfer mill Ø6mm","operation":"chamfering","rpm":6500,"feed":1200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    }
+  ]
+  

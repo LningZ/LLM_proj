@@ -12,9 +12,7 @@ def validate_plan(df: pd.DataFrame, material: str) -> pd.DataFrame:
     if limits is None:
         # unknown material -> mark invalid
         df["RPM Valid"] = False
-        df["Feed Valid"] = False
-        mask = (df["Spindle Speed (RPM)"] == 0) & (df["Feed Rate (mm/min)"] == 0)
-        df.loc[mask, ["RPM Valid", "Feed Valid"]] = True    
+        df["Feed Valid"] = False   
         return df
 
     r_min, r_max = limits["rpm"]
@@ -22,6 +20,11 @@ def validate_plan(df: pd.DataFrame, material: str) -> pd.DataFrame:
 
     df["RPM Valid"]  = df["Spindle Speed (RPM)"].between(r_min, r_max)
     df["Feed Valid"] = df["Feed Rate (mm/min)"].between(f_min, f_max)
+    
+    # 非切削工序（rpm=0 且 feed=0）强制判定为 True
+    mask = (df["Spindle Speed (RPM)"] == 0) & (df["Feed Rate (mm/min)"] == 0)
+    df.loc[mask, ["RPM Valid", "Feed Valid"]] = True 
+    
     return df
 
 
