@@ -7,6 +7,7 @@ from typing import List, Dict, Any
 from pydantic import BaseModel, PositiveInt, ValidationError,NonNegativeInt
 import json
 import tiktoken
+from openai import OpenAIError 
 
 
 # === 加载 .env 文件中的环境变量 ===
@@ -38,7 +39,8 @@ def chat_completion(messages: list,
                     model: str = "gpt-4o",
                     temperature: float = 0.3,
                     *,
-                    verbose: bool = True) -> str:
+                    verbose: bool = True,
+                    ) -> str:
     """
     Call OpenAI chat completion with a list of messages.
     `messages` must already include system / user roles.
@@ -87,24 +89,3 @@ def parse_llm_output(response_text: str, schema: BaseModel) -> List[dict]:
 
     return validated_list
 
-
-
-def repair_invalid_row(row: Dict, material: str,
-                       rpm_min: int, rpm_max: int,
-                       feed_min: int, feed_max: int) -> Dict:
-    """
-    修正单个工序中的rpm和feed，返回修正后的 {"rpm":..., "feed":...}
-    """
-    prompt = (
-        "You previously output the following machining step, but the spindle speed or feed rate violates material limits:\n"
-        f"{json.dumps(row, ensure_ascii=False)}\n\n"
-        f"For {material}, spindle speed must be between {rpm_min}-{rpm_max} rpm, "
-        f"and feed rate between {feed_min}-{feed_max} mm/min.\n"
-        "Please return ONLY the corrected JSON object with the same fields and valid rpm and feed."
-    )
-
-    system_msg = {"role": "system", "content": "You are a CNC process planner."}
-    user_msg = {"role": "user", "content": prompt}
-
-    raw = chat_completion(messages=[system_msg, user_msg], verbose=False)
-    return json.loads(raw)
