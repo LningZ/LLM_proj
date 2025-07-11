@@ -1,0 +1,18 @@
+{
+    "aluminum": ["aluminum"],
+    "steel": ["steel"],
+    "brass": ["brass"],
+    "titanium": ["titanium"],
+    "plastic": ["plastic"],
+    "carbon_fiber": ["carbon fiber", "carbonfiber"],
+    "cast_iron": ["cast iron"],
+    "copper": ["copper"],
+    "bronze": ["bronze"],
+    "fiberglass": ["fiberglass", "fiber glass"],
+    "magnesium": ["magnesium"],
+    "acrylic": ["acrylic", "plexiglass"],
+    "plywood": ["plywood", "wood"],
+    "stainless": ["stainless", "stainless steel"],
+    "inconel": ["inconel"]
+  }
+  

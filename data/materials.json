@@ -3,5 +3,15 @@
   "steel":    { "rpm": [500, 1500],   "feed": [50, 300],   "power": 4.0 },
   "brass":    { "rpm": [1500, 6000],  "feed": [400, 800],  "power": 4.5 },
   "titanium": { "rpm": [100, 500],    "feed": [50, 200],   "power": 3.0 },
-  "plastic":  { "rpm": [2000, 8000],  "feed": [500, 1500], "power": 2.5 }
+  "plastic":  { "rpm": [2000, 8000],  "feed": [500, 1500], "power": 2.5 },
+  "copper":      { "rpm": [1000, 4500],  "feed": [300, 650],  "power": 4.2 },
+  "bronze":      { "rpm": [800, 4000],   "feed": [250, 550],  "power": 4.3 },
+  "stainless":   { "rpm": [300, 1000],   "feed": [40, 250],   "power": 4.0 },
+  "cast_iron":   { "rpm": [200, 800],    "feed": [100, 400],  "power": 3.8 },
+  "carbon_fiber":{ "rpm": [4000, 12000], "feed": [700, 2000], "power": 3.2 },
+  "fiberglass":  { "rpm": [3000, 10000], "feed": [600, 1800], "power": 3.0 },
+  "plywood":     { "rpm": [5000, 15000], "feed": [1500, 3000],"power": 2.0 },
+  "acrylic":     { "rpm": [2500, 10000], "feed": [400, 1200], "power": 2.5 },
+  "magnesium":   { "rpm": [2000, 8000],  "feed": [500, 1200], "power": 2.8 },
+  "inconel":     { "rpm": [100, 400],    "feed": [20, 120],   "power": 5.5 }
 }

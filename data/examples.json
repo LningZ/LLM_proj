@@ -53,6 +53,117 @@
         {"step":"Chamfer Edges","tool":"Chamfer mill Ø6mm","operation":"chamfering","rpm":6500,"feed":1200},
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
+    },
+    {
+      "part": "copper heat sink 100x100x10 mm with microfins",
+      "material": "copper",
+      "detail": [
+        {"step":"Rough Facing","tool":"Face mill Ø20mm","operation":"facing","rpm":3500,"feed":600},
+        {"step":"Rough Pocket","tool":"End mill Ø6mm","operation":"pocket milling","rpm":4000,"feed":650},
+        {"step":"Finish Microfins","tool":"Slot mill Ø2mm","operation":"slot milling","rpm":4200,"feed":500},
+        {"step":"Drill Mounting Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":3000,"feed":400},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "bronze bushing Ø40 x 60 mm",
+      "material": "bronze",
+      "detail": [
+        {"step":"Rough Turning","tool":"Boring bar","operation":"turning","rpm":1500,"feed":450},
+        {"step":"Finish Turning","tool":"Finishing insert","operation":"finish turning","rpm":2500,"feed":350},
+        {"step":"Internal Reaming","tool":"Reamer Ø38mm","operation":"reaming","rpm":2000,"feed":300},
+        {"step":"Chamfer Edges","tool":"Chamfer tool","operation":"chamfering","rpm":1800,"feed":400},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "stainless valve body 60x60x40 mm with two ports",
+      "material": "stainless",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø16mm","operation":"facing","rpm":600,"feed":200},
+        {"step":"Rough Pocket","tool":"End mill Ø12mm","operation":"pocket milling","rpm":700,"feed":220},
+        {"step":"Finish Pocket","tool":"End mill Ø8mm","operation":"finish milling","rpm":900,"feed":180},
+        {"step":"Drill Port Holes","tool":"Drill Ø10mm","operation":"drilling","rpm":800,"feed":150},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "cast iron cylinder bore Ø90 x 100 mm",
+      "material": "cast_iron",
+      "detail": [
+        {"step":"Rough Boring","tool":"Boring bar Ø80mm","operation":"boring","rpm":400,"feed":300},
+        {"step":"Semi-finish Boring","tool":"Boring bar Ø85mm","operation":"semi-finish boring","rpm":500,"feed":250},
+        {"step":"Finish Honing","tool":"Honing head Ø90mm","operation":"honing","rpm":600,"feed":150},
+        {"step":"Chamfer Edges","tool":"Chamfer tool","operation":"chamfering","rpm":300,"feed":200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "carbon fiber drone frame 250x200x3 mm",
+      "material": "carbon_fiber",
+      "detail": [
+        {"step":"Rough Contour","tool":"Diamond-coated end mill Ø6mm","operation":"contour milling","rpm":10000,"feed":1500},
+        {"step":"Finish Contour","tool":"Diamond-coated end mill Ø3mm","operation":"finish milling","rpm":12000,"feed":1200},
+        {"step":"Drill Mount Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":11000,"feed":1000},
+        {"step":"Chamfer Edges","tool":"Chamfer mill Ø4mm","operation":"chamfering","rpm":9000,"feed":1400},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "fiberglass panel 300x200x5 mm with slots",
+      "material": "fiberglass",
+      "detail": [
+        {"step":"Rough Facing","tool":"Diamond end mill Ø10mm","operation":"facing","rpm":7000,"feed":1400},
+        {"step":"Cut Slots","tool":"Diamond end mill Ø4mm","operation":"slot milling","rpm":8000,"feed":1600},
+        {"step":"Drill Holes","tool":"Drill Ø5mm","operation":"drilling","rpm":9000,"feed":1200},
+        {"step":"Countersink Holes","tool":"Countersink Ø10mm","operation":"countersinking","rpm":8500,"feed":1000},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "plywood furniture leg 50x50x400 mm tapered",
+      "material": "plywood",
+      "detail": [
+        {"step":"Rough Profiling","tool":"Router bit Ø12mm","operation":"profiling","rpm":10000,"feed":2500},
+        {"step":"Finish Profiling","tool":"Router bit Ø6mm","operation":"finish milling","rpm":12000,"feed":2000},
+        {"step":"Drill Mount Holes","tool":"Drill Ø8mm","operation":"drilling","rpm":8000,"feed":1800},
+        {"step":"Roundover Edges","tool":"Roundover bit Ø6mm","operation":"edge rounding","rpm":9000,"feed":2200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "acrylic display stand 150x100x5 mm L-shape",
+      "material": "acrylic",
+      "detail": [
+        {"step":"Rough Facing","tool":"O-flute end mill Ø10mm","operation":"facing","rpm":5000,"feed":1000},
+        {"step":"Cut Profile","tool":"O-flute end mill Ø6mm","operation":"profile cutting","rpm":6000,"feed":900},
+        {"step":"Drill Mount Holes","tool":"Drill Ø5mm","operation":"drilling","rpm":5500,"feed":800},
+        {"step":"Polish Edges","tool":"Polishing wheel","operation":"polishing","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "magnesium gearbox housing 80x50x20 mm",
+      "material": "magnesium",
+      "detail": [
+        {"step":"Rough Pocket","tool":"End mill Ø10mm","operation":"pocket milling","rpm":6000,"feed":900},
+        {"step":"Finish Pocket","tool":"End mill Ø6mm","operation":"finish milling","rpm":7000,"feed":800},
+        {"step":"Drill Bolt Holes","tool":"Drill Ø6mm","operation":"drilling","rpm":5000,"feed":700},
+        {"step":"Deburr Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "inconel turbine disk Ø200x30 mm",
+      "material": "inconel",
+      "detail": [
+        {"step":"Rough Turning","tool":"Ceramic insert","operation":"turning","rpm":250,"feed":100},
+        {"step":"Finish Turning","tool":"CBN insert","operation":"finish turning","rpm":300,"feed":80},
+        {"step":"Drill Bolt Circle","tool":"Carbide drill Ø8mm","operation":"drilling","rpm":350,"feed":60},
+        {"step":"Chamfer Edges","tool":"Chamfer tool","operation":"chamfering","rpm":200,"feed":90},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
     }
   ]
+  
   
