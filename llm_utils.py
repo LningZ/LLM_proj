@@ -1,29 +1,32 @@
 # llm_utils.py
+
 import os
+import json
+from typing import List, Dict, Any
+
 import openai
+from openai import OpenAIError
 from dotenv import load_dotenv
 from tenacity import retry, wait_exponential, stop_after_attempt
-from typing import List, Dict, Any
-from pydantic import BaseModel, PositiveInt, ValidationError,NonNegativeInt
-import json
+
+from pydantic import BaseModel, PositiveInt, NonNegativeInt, ValidationError
 import tiktoken
-from openai import OpenAIError 
 
-
-# === 加载 .env 文件中的环境变量 ===
+# === Load environment variables (e.g., OPENAI_API_KEY) from .env ===
 load_dotenv()
 
-# === 初始化客户端 ===
+# === Initialize OpenAI client ===
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# === 全局 token 统计 ===
+# === Global token usage counter ===
 TOKENS_USED: int = 0
 
+# === Pydantic schema for outline-level step ===
 class OutlineStep(BaseModel):
     step: str
     description: str
 
-
+# === Pydantic schema for detailed machining step ===
 class DetailStep(BaseModel):
     step: str
     tool: str
@@ -31,19 +34,30 @@ class DetailStep(BaseModel):
     rpm: NonNegativeInt
     feed: NonNegativeInt
 
-
-@retry(wait=wait_exponential(multiplier=1, min=1, max=10),
-       stop=stop_after_attempt(3),
-       reraise=True)
-def chat_completion(messages: list,
-                    model: str = "gpt-4o",
-                    temperature: float = 0.3,
-                    *,
-                    verbose: bool = True,
-                    ) -> str:
+# === LLM call wrapper ===
+@retry(
+    wait=wait_exponential(multiplier=1, min=1, max=10),
+    stop=stop_after_attempt(3),
+    reraise=True
+)
+def chat_completion(
+    messages: List[Dict[str, str]],
+    model: str = "gpt-4o",
+    temperature: float = 0.3,
+    *,
+    verbose: bool = True
+) -> str:
     """
-    Call OpenAI chat completion with a list of messages.
-    `messages` must already include system / user roles.
+    Call OpenAI chat model with a list of role-content messages.
+    
+    Args:
+        messages (List[Dict]): List of messages with role/content.
+        model (str): OpenAI model name (default: gpt-4o).
+        temperature (float): Sampling temperature (default: 0.3).
+        verbose (bool): If True, print response content.
+
+    Returns:
+        str: LLM-generated content (plain text).
     """
     response = client.chat.completions.create(
         model=model,
@@ -51,29 +65,37 @@ def chat_completion(messages: list,
         temperature=temperature
     )
     
-    # token counter
+    # === Token counting ===
     global TOKENS_USED
     if response.usage:
         TOKENS_USED += response.usage.total_tokens
-        
     else:
-        enc = tiktoken.encoding_for_model(model)# fallback：本地估算
+        # Fallback: estimate token usage locally if server doesn't return usage
+        enc = tiktoken.encoding_for_model(model)
         prompt_tokens = sum(len(enc.encode(m["content"])) for m in messages)
         completion_tokens = len(enc.encode(response.choices[0].message.content))
         TOKENS_USED += prompt_tokens + completion_tokens
 
     content = response.choices[0].message.content.strip()
     if verbose:
-        print("LLM Response:\n", content)  
+        print("LLM Response:\n", content)
     return content
 
-# === LLM JSON 解析 + Pydantic 校验 ===
+# === Parse and validate LLM-generated JSON output ===
 def parse_llm_output(response_text: str, schema: BaseModel) -> List[dict]:
     """
-    Load JSON text from LLM, validate each item with a Pydantic schema,
-    and return a list of dictionaries.
+    Parse LLM output (in JSON format) and validate each item using a Pydantic schema.
+
+    Args:
+        response_text (str): Raw JSON string returned by the LLM.
+        schema (BaseModel): Pydantic class to validate each item.
+
+    Returns:
+        List[dict]: Validated list of dictionaries.
+
+    Raises:
+        ValueError: If JSON cannot be parsed or any field fails validation.
     """
-    
     try:
         raw_list = json.loads(response_text)
     except json.JSONDecodeError as e:
@@ -82,10 +104,9 @@ def parse_llm_output(response_text: str, schema: BaseModel) -> List[dict]:
     validated_list = []
     for item in raw_list:
         try:
-            obj = schema(**item)  
+            obj = schema(**item)
             validated_list.append(obj.dict())
         except ValidationError as ve:
-            raise ValueError(f"Field validation failed : {ve}")
+            raise ValueError(f"Field validation failed: {ve}")
 
     return validated_list
-
