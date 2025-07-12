@@ -1,5 +1,12 @@
+# === Core dependencies ===
 openai>=1.25.0,<2
 tenacity>=8.2
+tiktoken>=0.5
+
+# === Data & display ===
 pandas
 ipywidgets
-tiktoken>=0.5
+
+# === Embedding model ===
+sentence-transformers
+scikit-learn
