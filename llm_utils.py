@@ -133,7 +133,7 @@ def robust_generate_and_parse(
         Parsed and validated list of dictionaries, or [] on failure.
     """
     for attempt in range(1, max_attempts + 1):
-        #print(f"[Attempt {attempt}] Calling LLM...")
+        print(f"[Attempt {attempt}] Calling LLM...")
         try:
             raw = chat_completion(messages=messages, verbose=verbose)
             return parse_llm_output(raw, schema)
