@@ -40,6 +40,8 @@ class DetailStep(BaseModel):
     stop=stop_after_attempt(3),
     reraise=True
 )
+
+
 def chat_completion(
     messages: List[Dict[str, str]],
     model: str = "gpt-4o",
@@ -110,3 +112,34 @@ def parse_llm_output(response_text: str, schema: BaseModel) -> List[dict]:
             raise ValueError(f"Field validation failed: {ve}")
 
     return validated_list
+
+def robust_generate_and_parse(
+    messages: List[Dict[str, str]],
+    schema: BaseModel,
+    max_attempts: int = 3,
+    verbose: bool = False
+) -> List[dict]:
+    """
+    Try calling chat_completion and parsing the result.
+    Retry up to max_attempts if parsing fails.
+
+    Args:
+        messages: Prompt messages to send to the model.
+        schema: Pydantic schema to parse against.
+        max_attempts: Number of retries allowed.
+        verbose: Whether to print intermediate outputs.
+
+    Returns:
+        Parsed and validated list of dictionaries, or [] on failure.
+    """
+    for attempt in range(1, max_attempts + 1):
+        #print(f"[Attempt {attempt}] Calling LLM...")
+        try:
+            raw = chat_completion(messages=messages, verbose=verbose)
+            return parse_llm_output(raw, schema)
+        except Exception as e:
+            print(f" Parsing failed: {e}")
+            if attempt == max_attempts:
+                print(" All attempts failed. Returning empty list.")
+                return []
+            print(" Retrying...\n")
