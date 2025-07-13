@@ -11,6 +11,34 @@
       ]
     },
     {
+      "part": "aluminum mounting bracket 80x50x10 mm with tapped holes",
+      "material": "aluminum",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø12mm","operation":"facing","rpm":10000,"feed":1300},
+        {"step":"Drill Mounting Holes","tool":"Drill Ø5mm","operation":"drilling","rpm":11000,"feed":1000},
+        {"step":"Tap Threads","tool":"M5 Tap","operation":"tapping","rpm":800,"feed":200},
+        {"step":"Chamfer Hole Entries","tool":"Chamfer mill Ø4mm","operation":"chamfering","rpm":9500,"feed":1200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+    {
+      "part": "aluminum heat sink base 100x100x6 mm with fine fins",
+      "material": "aluminum",
+      "detail": [
+        {"step":"Rough Pocket","tool":"End mill Ø10mm","operation":"pocket milling","rpm":10500,"feed":1400},
+        {"step":"Cut Fins","tool":"Slot mill Ø2mm","operation":"slot milling","rpm":11500,"feed":1000},
+        {"step":"Deburr Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Drill Mounting Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":10000,"feed":900},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+    
+    
+    {
       "part": "steel shaft Ø30 x 120 mm",
       "material": "steel",
       "detail": [
@@ -21,6 +49,35 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+
+    {
+      "part": "steel connecting rod 150x30x20 mm with reamed bores",
+      "material": "steel",
+      "detail": [
+        {"step":"Rough Profile Milling","tool":"End mill Ø10mm","operation":"profiling","rpm":1000,"feed":250},
+        {"step":"Drill Bearing Bores","tool":"Drill Ø8mm","operation":"drilling","rpm":900,"feed":180},
+        {"step":"Ream Bores","tool":"Reamer Ø8mm","operation":"reaming","rpm":800,"feed":120},
+        {"step":"Chamfer Edges","tool":"Chamfer tool","operation":"chamfering","rpm":850,"feed":150},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+    {
+      "part": "steel baseplate 120x100x10 mm with counterbored holes",
+      "material": "steel",
+      "detail": [
+        {"step":"Rough Facing","tool":"Face mill Ø20mm","operation":"facing","rpm":950,"feed":300},
+        {"step":"Drill Holes","tool":"Drill Ø6mm","operation":"drilling","rpm":1000,"feed":180},
+        {"step":"Counterbore Holes","tool":"Counterbore Ø10mm","operation":"counterboring","rpm":800,"feed":150},
+        {"step":"Edge Deburring","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+
+
     {
       "part": "brass fluidic manifold 80x60x10 mm",
       "material": "brass",
@@ -32,6 +89,37 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+
+    {
+      "part": "brass terminal block 60x30x10 mm with threaded holes",
+      "material": "brass",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø8mm","operation":"facing","rpm":4800,"feed":700},
+        {"step":"Drill Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":7000,"feed":500},
+        {"step":"Thread Holes","tool":"M3 Tap","operation":"tapping","rpm":600,"feed":100},
+        {"step":"Chamfer Hole Entrances","tool":"Chamfer mill Ø3mm","operation":"chamfering","rpm":5000,"feed":600},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    
+    {
+      "part": "brass gear blank Ø50x10 mm with center bore",
+      "material": "brass",
+      "detail": [
+        {"step":"Face Surface","tool":"Face mill Ø16mm","operation":"facing","rpm":5200,"feed":750},
+        {"step":"Drill Center Bore","tool":"Drill Ø10mm","operation":"drilling","rpm":6500,"feed":550},
+        {"step":"Ream Center Hole","tool":"Reamer Ø10H7","operation":"reaming","rpm":6000,"feed":400},
+        {"step":"Edge Chamfer","tool":"Chamfer mill Ø4mm","operation":"chamfering","rpm":5000,"feed":500},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    
+
+
+
+
+
+
     {
       "part": "titanium turbine blade 180 mm tall",
       "material": "titanium",
@@ -44,6 +132,33 @@
       ]
     },
     {
+      "part": "titanium bracket 100x60x8 mm with threaded holes",
+      "material": "titanium",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø10mm","operation":"facing","rpm":350,"feed":100},
+        {"step":"Drill Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":400,"feed":90},
+        {"step":"Thread Holes","tool":"M4 Tap","operation":"tapping","rpm":250,"feed":60},
+        {"step":"Chamfer Edges","tool":"Chamfer tool Ø4mm","operation":"chamfering","rpm":300,"feed":70},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "titanium sensor housing Ø60x30 mm with inner cavity",
+      "material": "titanium",
+      "detail": [
+        {"step":"Rough Boring","tool":"Boring bar Ø40mm","operation":"boring","rpm":300,"feed":120},
+        {"step":"Finish Cavity","tool":"Ball end mill Ø6mm","operation":"finish milling","rpm":400,"feed":80},
+        {"step":"Drill Side Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":450,"feed":90},
+        {"step":"Deburr Inner Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+
+
+    {
       "part": "POM cam plate Ø200 x15 mm with eccentric slot",
       "material": "plastic",
       "detail": [
@@ -54,6 +169,34 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+    {
+      "part": "POM cover plate 120x80x5 mm with mounting holes",
+      "material": "plastic",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø12mm","operation":"facing","rpm":6500,"feed":1500},
+        {"step":"Profile Outer Shape","tool":"End mill Ø6mm","operation":"profiling","rpm":7000,"feed":1600},
+        {"step":"Drill Mounting Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":7500,"feed":1200},
+        {"step":"Chamfer Edges","tool":"Chamfer tool Ø4mm","operation":"chamfering","rpm":6800,"feed":1300},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "POM pulley Ø80x15 mm with center bore",
+      "material": "plastic",
+      "detail": [
+        {"step":"Rough Turning","tool":"Carbide insert CNMG","operation":"turning","rpm":5000,"feed":1400},
+        {"step":"Finish Groove","tool":"Grooving tool Ø2mm","operation":"grooving","rpm":5200,"feed":1200},
+        {"step":"Drill Center Bore","tool":"Drill Ø10mm","operation":"drilling","rpm":7000,"feed":1100},
+        {"step":"Chamfer Bore","tool":"Chamfer tool Ø6mm","operation":"chamfering","rpm":6500,"feed":1000},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+          
+
+
+
+
+
     {
       "part": "copper heat sink 100x100x10 mm with microfins",
       "material": "copper",
@@ -66,6 +209,33 @@
       ]
     },
     {
+      "part": "copper contact plate 60x40x5 mm with drilled holes",
+      "material": "copper",
+      "detail": [
+        {"step":"Surface Facing","tool":"End mill Ø10mm","operation":"facing","rpm":3600,"feed":700},
+        {"step":"Drill Contact Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":4200,"feed":600},
+        {"step":"Deburr Holes","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Chamfer Edges","tool":"Chamfer tool Ø3mm","operation":"chamfering","rpm":4000,"feed":500},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "copper L-block 80x60x20 mm with side pocket",
+      "material": "copper",
+      "detail": [
+        {"step":"Rough Profile","tool":"End mill Ø12mm","operation":"profiling","rpm":3500,"feed":600},
+        {"step":"Mill Side Pocket","tool":"End mill Ø6mm","operation":"pocket milling","rpm":4000,"feed":550},
+        {"step":"Drill Mount Holes","tool":"Drill Ø5mm","operation":"drilling","rpm":3800,"feed":500},
+        {"step":"Chamfer Features","tool":"Chamfer tool Ø4mm","operation":"chamfering","rpm":3600,"feed":550},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+
+
+    {
       "part": "bronze bushing Ø40 x 60 mm",
       "material": "bronze",
       "detail": [
@@ -76,6 +246,33 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+    {
+      "part": "bronze thrust washer Ø50x5 mm with center hole",
+      "material": "bronze",
+      "detail": [
+        {"step":"Face Both Sides","tool":"Face mill Ø20mm","operation":"facing","rpm":2000,"feed":500},
+        {"step":"Drill Center Hole","tool":"Drill Ø20mm","operation":"drilling","rpm":2200,"feed":400},
+        {"step":"Ream Hole","tool":"Reamer Ø20H7","operation":"reaming","rpm":2000,"feed":300},
+        {"step":"Deburr Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "bronze sleeve Ø60x40 mm with internal oil groove",
+      "material": "bronze",
+      "detail": [
+        {"step":"Rough Bore","tool":"Boring bar Ø50mm","operation":"boring","rpm":1600,"feed":400},
+        {"step":"Groove Internal Surface","tool":"Grooving tool Ø3mm","operation":"grooving","rpm":1800,"feed":350},
+        {"step":"Finish Bore","tool":"Finishing boring bar","operation":"finish boring","rpm":2000,"feed":300},
+        {"step":"Chamfer Ends","tool":"Chamfer tool","operation":"chamfering","rpm":1800,"feed":350},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+    
+    
     {
       "part": "stainless valve body 60x60x40 mm with two ports",
       "material": "stainless",
@@ -88,6 +285,33 @@
       ]
     },
     {
+      "part": "stainless cover plate 100x80x5 mm with threaded holes",
+      "material": "stainless",
+      "detail": [
+        {"step":"Rough Facing","tool":"End mill Ø10mm","operation":"facing","rpm":600,"feed":180},
+        {"step":"Drill Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":650,"feed":150},
+        {"step":"Tap Holes","tool":"M4 Tap","operation":"tapping","rpm":400,"feed":100},
+        {"step":"Chamfer Hole Entrances","tool":"Chamfer mill Ø4mm","operation":"chamfering","rpm":700,"feed":150},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "stainless mounting flange Ø100x10 mm with bolt holes",
+      "material": "stainless",
+      "detail": [
+        {"step":"Face Surface","tool":"Face mill Ø16mm","operation":"facing","rpm":700,"feed":200},
+        {"step":"Drill Bolt Circle Holes","tool":"Drill Ø6mm","operation":"drilling","rpm":650,"feed":180},
+        {"step":"Counterbore Holes","tool":"Counterbore Ø10mm","operation":"counterboring","rpm":600,"feed":160},
+        {"step":"Deburr Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+    
+    
+    {
       "part": "cast iron cylinder bore Ø90 x 100 mm",
       "material": "cast_iron",
       "detail": [
@@ -98,6 +322,33 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+    {
+      "part": "cast iron pump cover 120x80x15 mm with bolt holes",
+      "material": "cast_iron",
+      "detail": [
+        {"step":"Rough Facing","tool":"Face mill Ø20mm","operation":"facing","rpm":500,"feed":250},
+        {"step":"Drill Bolt Holes","tool":"Drill Ø6mm","operation":"drilling","rpm":550,"feed":200},
+        {"step":"Spot Face Holes","tool":"Flat end mill Ø10mm","operation":"spot facing","rpm":500,"feed":180},
+        {"step":"Chamfer Holes","tool":"Chamfer tool","operation":"chamfering","rpm":450,"feed":150},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "cast iron bearing housing Ø100x40 mm with stepped bore",
+      "material": "cast_iron",
+      "detail": [
+        {"step":"Rough Boring","tool":"Boring bar Ø80mm","operation":"boring","rpm":450,"feed":280},
+        {"step":"Finish Stepped Bore","tool":"Boring bar Ø90mm","operation":"finish boring","rpm":500,"feed":220},
+        {"step":"Drill Mounting Holes","tool":"Drill Ø8mm","operation":"drilling","rpm":550,"feed":200},
+        {"step":"Deburr Internal Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+    
+
+    
     {
       "part": "carbon fiber drone frame 250x200x3 mm",
       "material": "carbon_fiber",
@@ -110,6 +361,32 @@
       ]
     },
     {
+      "part": "carbon fiber camera mount 100x50x3 mm with profile cutout",
+      "material": "carbon_fiber",
+      "detail": [
+        {"step":"Contour Outer Profile","tool":"Diamond-coated end mill Ø4mm","operation":"contour milling","rpm":11000,"feed":1300},
+        {"step":"Cut Internal Slots","tool":"Diamond-coated end mill Ø3mm","operation":"slot milling","rpm":12000,"feed":1100},
+        {"step":"Drill Mount Holes","tool":"Carbide drill Ø2.5mm","operation":"drilling","rpm":10000,"feed":900},
+        {"step":"Deburr Edges","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "carbon fiber U-bracket 80x60x5 mm with through-holes",
+      "material": "carbon_fiber",
+      "detail": [
+        {"step":"Rough Profile","tool":"Diamond-coated end mill Ø6mm","operation":"profiling","rpm":9500,"feed":1200},
+        {"step":"Drill Through Holes","tool":"Carbide drill Ø5mm","operation":"drilling","rpm":10500,"feed":1000},
+        {"step":"Chamfer Holes","tool":"Chamfer mill Ø3mm","operation":"chamfering","rpm":9000,"feed":1100},
+        {"step":"Edge Polishing","tool":"Polishing wheel","operation":"polishing","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    
+
+    
+
+    {
       "part": "fiberglass panel 300x200x5 mm with slots",
       "material": "fiberglass",
       "detail": [
@@ -120,6 +397,34 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+    {
+      "part": "fiberglass control panel 150x100x4 mm with cutouts",
+      "material": "fiberglass",
+      "detail": [
+        {"step":"Rough Facing","tool":"Diamond end mill Ø8mm","operation":"facing","rpm":7500,"feed":1300},
+        {"step":"Cut Display Window","tool":"Diamond end mill Ø3mm","operation":"pocket milling","rpm":8000,"feed":1400},
+        {"step":"Drill Pushbutton Holes","tool":"Carbide drill Ø4mm","operation":"drilling","rpm":8500,"feed":1200},
+        {"step":"Chamfer Edges","tool":"Chamfer mill Ø3mm","operation":"chamfering","rpm":8000,"feed":1000},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "fiberglass motor cover 100x80x6 mm with vent slots",
+      "material": "fiberglass",
+      "detail": [
+        {"step":"Profile Outer Shape","tool":"Diamond end mill Ø6mm","operation":"profiling","rpm":8200,"feed":1500},
+        {"step":"Cut Vent Slots","tool":"Diamond end mill Ø2mm","operation":"slot milling","rpm":9000,"feed":1300},
+        {"step":"Drill Mount Holes","tool":"Drill Ø5mm","operation":"drilling","rpm":8500,"feed":1200},
+        {"step":"Deburr and Clean","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    
+    
+
+
+
+
     {
       "part": "plywood furniture leg 50x50x400 mm tapered",
       "material": "plywood",
@@ -132,6 +437,33 @@
       ]
     },
     {
+      "part": "plywood seat support 300x50x20 mm with curved profile",
+      "material": "plywood",
+      "detail": [
+        {"step":"Rough Profile Cut","tool":"Router bit Ø10mm","operation":"profiling","rpm":9500,"feed":2200},
+        {"step":"Finish Curve","tool":"Ball nose router Ø6mm","operation":"finish milling","rpm":11000,"feed":2000},
+        {"step":"Drill Screw Holes","tool":"Drill Ø5mm","operation":"drilling","rpm":8500,"feed":1800},
+        {"step":"Roundover Edges","tool":"Roundover bit Ø6mm","operation":"edge rounding","rpm":10000,"feed":2200},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "plywood base plate 200x150x12 mm with mounting slots",
+      "material": "plywood",
+      "detail": [
+        {"step":"Surface Facing","tool":"Planing cutter Ø20mm","operation":"facing","rpm":9000,"feed":2500},
+        {"step":"Cut Mounting Slots","tool":"Router bit Ø6mm","operation":"slot milling","rpm":10000,"feed":2200},
+        {"step":"Drill Alignment Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":8500,"feed":1800},
+        {"step":"Chamfer Slot Ends","tool":"Chamfer bit Ø4mm","operation":"chamfering","rpm":9500,"feed":2000},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+    
+    
+    {
       "part": "acrylic display stand 150x100x5 mm L-shape",
       "material": "acrylic",
       "detail": [
@@ -142,6 +474,33 @@
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
     },
+    {
+      "part": "acrylic nameplate 120x40x3 mm with engraved text",
+      "material": "acrylic",
+      "detail": [
+        {"step":"Rough Profile Cut","tool":"O-flute end mill Ø6mm","operation":"profiling","rpm":6000,"feed":1000},
+        {"step":"Engrave Text","tool":"Engraving bit Ø0.5mm","operation":"engraving","rpm":7000,"feed":300},
+        {"step":"Drill Mount Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":6500,"feed":800},
+        {"step":"Polish Surface","tool":"Polishing wheel","operation":"polishing","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "acrylic enclosure panel 100x80x4 mm with cutouts",
+      "material": "acrylic",
+      "detail": [
+        {"step":"Cut Outer Shape","tool":"O-flute end mill Ø8mm","operation":"profile cutting","rpm":6200,"feed":900},
+        {"step":"Cut USB Port Slot","tool":"O-flute end mill Ø2mm","operation":"slot milling","rpm":6800,"feed":800},
+        {"step":"Drill Mount Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":6000,"feed":850},
+        {"step":"Deburr & Polish","tool":"Deburr wheel","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+
+    
+    
     {
       "part": "magnesium gearbox housing 80x50x20 mm",
       "material": "magnesium",
@@ -154,6 +513,33 @@
       ]
     },
     {
+      "part": "magnesium electronics housing 100x60x10 mm with internal cavity",
+      "material": "magnesium",
+      "detail": [
+        {"step":"Rough Pocket","tool":"End mill Ø8mm","operation":"pocket milling","rpm":6500,"feed":950},
+        {"step":"Finish Pocket","tool":"End mill Ø6mm","operation":"finish milling","rpm":7000,"feed":850},
+        {"step":"Drill Mounting Holes","tool":"Drill Ø4mm","operation":"drilling","rpm":6000,"feed":800},
+        {"step":"Chamfer Top Edges","tool":"Chamfer tool Ø3mm","operation":"chamfering","rpm":6500,"feed":700},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "magnesium drone arm 150x20x10 mm with contour slots",
+      "material": "magnesium",
+      "detail": [
+        {"step":"Cut Outer Contour","tool":"End mill Ø6mm","operation":"contour milling","rpm":7000,"feed":900},
+        {"step":"Cut Weight Reduction Slots","tool":"Slot mill Ø3mm","operation":"slot milling","rpm":7200,"feed":850},
+        {"step":"Drill Mount Holes","tool":"Drill Ø3mm","operation":"drilling","rpm":6000,"feed":800},
+        {"step":"Deburr Slots","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+
+
+    
+    
+
+    {
       "part": "inconel turbine disk Ø200x30 mm",
       "material": "inconel",
       "detail": [
@@ -163,7 +549,31 @@
         {"step":"Chamfer Edges","tool":"Chamfer tool","operation":"chamfering","rpm":200,"feed":90},
         {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
       ]
-    }
+    },
+    {
+      "part": "inconel exhaust flange Ø120x12 mm with bolt circle",
+      "material": "inconel",
+      "detail": [
+        {"step":"Rough Turning","tool":"Ceramic insert","operation":"turning","rpm":200,"feed":80},
+        {"step":"Drill Bolt Holes","tool":"Carbide drill Ø6mm","operation":"drilling","rpm":300,"feed":60},
+        {"step":"Finish Turning","tool":"CBN insert","operation":"finish turning","rpm":250,"feed":50},
+        {"step":"Chamfer Hole Edges","tool":"Chamfer tool Ø4mm","operation":"chamfering","rpm":200,"feed":40},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    },
+    {
+      "part": "inconel turbine hub Ø150x40 mm with central bore",
+      "material": "inconel",
+      "detail": [
+        {"step":"Rough Bore","tool":"Boring bar Ø100mm","operation":"boring","rpm":220,"feed":70},
+        {"step":"Finish Bore","tool":"Finishing boring bar","operation":"finish boring","rpm":250,"feed":60},
+        {"step":"Drill Cooling Holes","tool":"Carbide drill Ø4mm","operation":"drilling","rpm":280,"feed":50},
+        {"step":"Deburr Bore Entrance","tool":"Deburr tool","operation":"deburring","rpm":0,"feed":0},
+        {"step":"Inspection","tool":"None","operation":"inspection","rpm":0,"feed":0}
+      ]
+    }    
+    
+
   ]
   
   
